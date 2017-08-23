@@ -4,22 +4,52 @@
     <title>Listening to Nodes</title>
     <style>
      div {
-       border: 1px solid red;
-       padding: 6px;
-       min-height: 12px;
+       border: 1px solid blue;
+       padding: 10px;
+       min-height: 20px;
      }
     </style>
   </head>
 
   <body>
-    <main id="main">My ID is "main"!</main>
+    <main id="main">Hello!</main>
 
     <br />
 
     <div>
       <label>Input:</label><input />
     </div>
+<script>
+const main = document.getElementById('main')
 
+main.addEventListener('click', function(event) {
+  alert('I was clicked!')
+})
+
+const divs = document.querySelectorAll('div')
+
+function bubble(e) {
+  e.stopPropagation()
+
+  console.log(this.firstChild.nodeValue.trim() + ' bubbled')
+}
+
+for (let i = 0; i < divs.length; i++) {
+  divs[i].addEventListener('click', bubble)
+}
+
+divs = document.querySelectorAll('div')
+
+function capture(e) {
+  console.log(this.firstChild.nodeValue.trim() + ' captured')
+}
+
+for (let i = 0; i < divs.length; i++) {
+  // set the third argument to `true`!
+  divs[i].addEventListener('click', capture, true)
+}
+
+</script>
     <br />
 
     <div>
@@ -37,5 +67,7 @@
         </div>
       </div>
     </div>
+
+
   </body>
 </html>
